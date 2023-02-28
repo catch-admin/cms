@@ -1,15 +1,52 @@
 <template>
   <el-form :model="formData" label-width="120px" ref="form" v-loading="loading" class="pr-4">
     <el-form-item label="父级分类" prop="parent_id">
-      <el-select v-model="formData.parent_id" placeholder="请选择" clearable multiple>
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-      </el-select>
+      <el-tree-select v-model="formData.parent_id" value-key="id" placeholder="请选择" clearable class="w-full" :data="category" check-strictly :props="{ value: 'id', label: 'name' }" />
     </el-form-item>
-    <el-form-item label="分类名称" prop="name">
+    <el-form-item
+      label="分类名称"
+      prop="name"
+      :rules="[
+        {
+          required: true,
+          message: '分类名称必须填写',
+        },
+      ]"
+    >
       <el-input v-model="formData.name" name="name" clearable />
     </el-form-item>
-    <el-form-item label="缩略名" prop="slug">
+    <el-form-item
+      label="别名"
+      prop="slug"
+      :rules="[
+        {
+          required: true,
+          message: '分类别名必须填写',
+        },
+      ]"
+    >
       <el-input v-model="formData.slug" name="slug" clearable />
+      <div class="text-sm text-gray-300">别名可以自定义分类名称, 通常只包含字母、数字和"_,-"连字符</div>
+    </el-form-item>
+    <el-form-item label="类型" prop="type">
+      <el-radio-group v-model="formData.type">
+        <el-radio :label="1">文章</el-radio>
+        <el-radio :label="2">链接</el-radio>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item
+      label="链接地址"
+      prop="href"
+      v-if="formData.type === 2"
+      :rules="[
+        {
+          type: 'url',
+          required: true,
+          message: '链接地址格式不正确',
+        },
+      ]"
+    >
+      <el-input v-model="formData.href" name="href" placeholder="请输入链接地址" />
     </el-form-item>
     <el-form-item label="排序" prop="order">
       <el-input-number v-model="formData.order" name="order" :min="1" />
@@ -23,7 +60,8 @@
 <script lang="ts" setup>
 import { useCreate } from '/admin/composables/curd/useCreate'
 import { useShow } from '/admin/composables/curd/useShow'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+import http from '/admin/support/http'
 
 const props = defineProps({
   primary: String | Number,
@@ -31,12 +69,27 @@ const props = defineProps({
 })
 
 const { formData, form, loading, submitForm, close } = useCreate(props.api, props.primary)
+// 排序默认值
+formData.value.order = 1
+formData.value.type = 1
 
 if (props.primary) {
-  useShow(props.api, props.primary, formData)
+  const { afterShow } = useShow(props.api, props.primary, formData)
+  afterShow.value = form => {
+    if (form.value.parent_id === 0) {
+      delete form.value.parent_id
+    }
+  }
 }
 
+const category = ref()
+const getCategory = () => {
+  http.get(props.api).then(r => {
+    category.value = r.data.data
+  })
+}
 const emit = defineEmits(['close'])
+getCategory()
 onMounted(() => {
   close(() => emit('close'))
 })

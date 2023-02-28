@@ -1,0 +1,166 @@
+<template>
+  <div class="w-full" v-loading="loading">
+    <el-form :model="formData" label-width="120px" ref="form" class="pr-4 w-full bg-white dark:bg-regal-dark pt-5">
+      <div class="flex flex-row">
+        <div class="w-full">
+          <el-form-item
+            label="标题"
+            prop="title"
+            :rules="[
+              {
+                required: true,
+                message: '文章标题必须填写',
+              },
+            ]"
+          >
+            <el-input v-model="formData.title" name="title" clearable />
+          </el-form-item>
+          <el-form-item label="摘录" prop="excerpt">
+            <el-input v-model="formData.excerpt" name="excerpt" clearable type="textarea" />
+          </el-form-item>
+
+          <el-form-item
+            label="内容"
+            prop="content"
+            :rules="[
+              {
+                required: true,
+                message: '文章内容必须填写',
+              },
+            ]"
+          >
+            <editor :height="500" v-model="formData.content" />
+            <el-input v-model="formData.content" class="invisible" />
+          </el-form-item>
+        </div>
+        <div class="w-[27rem]">
+          <el-form-item
+            label="选择分类"
+            prop="category_id"
+            :rules="[
+              {
+                required: true,
+                message: '请先选择分类',
+              },
+            ]"
+          >
+            <el-tree-select v-model="formData.category_id" value-key="id" placeholder="选择分类" clearable class="w-full" :data="category" check-strictly :props="{ value: 'id', label: 'name' }" />
+          </el-form-item>
+          <el-form-item
+            class="mt-6"
+            label="作者"
+            prop="author"
+            :rules="[
+              {
+                required: true,
+                message: '请选择作者',
+              },
+            ]"
+          >
+            <el-select v-model="formData.author" placeholder="选择作者">
+              <el-option v-for="user in users" :key="user.id" :label="user.username" :value="user.id" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="可见性" prop="status" class="mt-6">
+            <el-select v-model="formData.visible" placeholder="选择可见性">
+              <el-option label="公开" :value="1" />
+              <el-option label="私密" :value="2" />
+              <el-option label="密码查看" :value="3" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="查看密码" prop="password" v-if="formData.visible === 3" class="mt-6">
+            <el-input v-model="formData.password" name="password" clearable placeholder="输入查看密码" />
+          </el-form-item>
+          <el-form-item label="可评论" prop="is_can_comment" class="mt-6">
+            <el-radio-group v-model="formData.is_can_comment">
+              <el-radio-button label="1">是</el-radio-button>
+              <el-radio-button label="2">否</el-radio-button>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="状态" prop="status" class="mt-6">
+            <el-radio-group v-model="formData.status">
+              <el-radio-button label="1">发布</el-radio-button>
+              <el-radio-button label="2">草稿</el-radio-button>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="置顶" prop="top" class="mt-6">
+            <el-radio-group v-model="formData.top">
+              <el-radio-button label="1">分类</el-radio-button>
+              <el-radio-button label="2">首页</el-radio-button>
+              <el-radio-button label="3">全局</el-radio-button>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="排序" prop="order" class="mt-6">
+            <el-input-number v-model="formData.order" name="order" clearable :min="1" />
+          </el-form-item>
+          <el-form-item label="标签" prop="order" class="mt-6">
+            <el-select v-model="formData.tags" multiple filterable allow-create placeholder="输入标签" />
+          </el-form-item>
+          <div class="bg-white dark:bg-regal-dark">
+            <div class="p-3 flex justify-center">
+              <router-link to="/cms/post">
+                <el-button>取消</el-button>
+              </router-link>
+              <el-button type="primary" @click="submitForm(form)" class="ml-5">保存</el-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </el-form>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { useCreate } from '/admin/composables/curd/useCreate'
+import { useShow } from '/admin/composables/curd/useShow'
+import { onMounted, ref, watch } from 'vue'
+import http from '/admin/support/http'
+import router from '/admin/router'
+import Structure from '../../../Develop/views/generate/components/structure.vue'
+
+const primary = router.currentRoute.value.params.id
+
+const api = '/cms/post'
+
+const { formData, form, loading, submitForm, afterCreate } = useCreate(api, primary)
+// 默认可评论
+formData.value.is_can_comment = 1
+formData.value.order = 1
+formData.value.status = 2
+afterCreate.value = () => {
+  router.push({ path: '/cms/post' })
+}
+
+if (primary) {
+  const { afterShow } = useShow(api, primary, formData)
+  afterShow.value = function (data) {
+    console.log(data)
+  }
+}
+
+const category = ref()
+const getCategory = () => {
+  http.get('cms/category').then(r => {
+    category.value = r.data.data
+  })
+}
+
+const users = ref()
+const getUsers = () => {
+  http.get('users').then(r => {
+    users.value = r.data.data
+  })
+}
+
+console.log()
+onMounted(() => {
+  getCategory()
+  getUsers()
+})
+</script>
+
+<style scoped>
+:deep(.el-loading-mask) {
+  z-index: 10000 !important;
+}
+</style>

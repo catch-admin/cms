@@ -14,7 +14,7 @@
         <el-table-column prop="name" label="分类名称" />
         <el-table-column label="别名">
           <template #default="scope">
-            <e-tag>{{ scope.row.slug }} </e-tag>
+            <el-tag>{{ scope.row.slug }} </el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="post_count" label="文章数量" />

@@ -13,7 +13,8 @@
           <Add />
         </router-link>
       </div>
-      <el-table :data="tableData" class="mt-3" v-loading="loading">
+      <el-table :data="tableData" class="mt-3" v-loading="loading" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="55" />
         <el-table-column prop="id" label="ID" width="50" />
         <el-table-column prop="title" label="标题" />
         <el-table-column prop="category" label="分类" />
@@ -34,17 +35,25 @@
           </template>
         </el-table-column>
       </el-table>
-      <Paginate />
+      <div class="flex justify-between">
+        <div class="pt-4">
+          <Destroy text="批量删除" @click="multiDel" />
+          <Update text="批量发布" @click="multiPublish" />
+        </div>
+        <Paginate />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue'
-import Create from './create.vue'
+import { computed, onMounted, ref } from 'vue'
 import { useGetList } from '/admin/composables/curd/useGetList'
 import { useDestroy } from '/admin/composables/curd/useDestroy'
 import { useOpen } from '/admin/composables/curd/useOpen'
+import Destroy from '/admin/components/admin/buttons/destroy.vue'
+import http from '/admin/support/http'
+import Message from '/admin/support/message'
 
 const api = 'cms/post'
 
@@ -58,4 +67,36 @@ onMounted(() => {
   search()
   deleted(reset)
 })
+
+// 多选
+const multiSelect = ref()
+const handleSelectionChange = posts => {
+  multiSelect.value = posts
+}
+
+const multiDel = () => {
+  let ids = ''
+  multiSelect.value.forEach(item => {
+    ids += item.id + ','
+  })
+  destroy('/cms/post', ids.substring(0, ids.length - 1))
+}
+
+const multiPublish = () => {
+  let ids = ''
+  multiSelect.value.forEach(item => {
+    if (item.status !== 1) {
+      ids += item.id + ','
+    }
+  })
+
+  if (ids.length === 0) {
+    Message.error('请选择未发布的文章')
+  } else {
+    Message.confirm('确认批量发布吗', () => {
+      http.put('/cms/post/enable/' + ids.substring(0, ids.length - 1)).then(r => {})
+      reset()
+    })
+  }
+}
 </script>

@@ -6,6 +6,7 @@ namespace Modules\Cms\Models;
 
 use Catch\Base\CatchModel as Model;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\Cms\Enums\Visible;
 use Modules\User\Models\User;
@@ -104,8 +105,11 @@ class Post extends Model
     {
         $tagNames = Request::get('tags');
 
-        $tags = Tags::getTagsByNames($tagNames);
+        if (! $tagNames) {
+            return;
+        }
 
+        $tags = Tags::getTagsByNames($tagNames);
         $existTagNames = $tags->pluck('name');
 
         $tagIds = $tags->pluck('id')->toArray();
@@ -116,5 +120,19 @@ class Post extends Model
         }
 
         $post->tags()->sync($tagIds);
+    }
+
+    /**
+     * parse int author
+     *
+     * @return Attribute
+     */
+    public function author(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => intval($value),
+
+            set: fn($value) => intval($value)
+        );
     }
 }

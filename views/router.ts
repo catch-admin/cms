@@ -22,7 +22,7 @@ const router: RouteRecordRaw[] = [
       {
         path: 'post/create/:id?',
         name: 'create-post',
-        meta: { title: '创建文章', icon: 'home', hidden: true, is_inner: true },
+        meta: { title: '创建文章', icon: 'home', hidden: true, active_menu: '/cms/post' },
         component: () => import('./post/create.vue'),
       },
     ],

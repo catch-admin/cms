@@ -112,17 +112,16 @@
 
 <script lang="ts" setup>
 import { useCreate } from '/admin/composables/curd/useCreate'
-import { useShow } from '/admin/composables/curd/useShow'
-import { onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import http from '/admin/support/http'
 import router from '/admin/router'
-import Structure from '../../../Develop/views/generate/components/structure.vue'
 
 const primary = router.currentRoute.value.params.id
 
 const api = '/cms/post'
+const createPost = ref()
 
-const { formData, form, loading, submitForm, afterCreate } = useCreate(api, primary)
+const { formData, form, loading, submitForm, afterCreate, afterUpdate } = useCreate(api, primary)
 // 默认可评论
 formData.value.is_can_comment = 1
 formData.value.order = 1
@@ -130,32 +129,39 @@ formData.value.status = 2
 afterCreate.value = () => {
   router.push({ path: '/cms/post' })
 }
-
-if (primary) {
-  const { afterShow } = useShow(api, primary, formData)
-  afterShow.value = function (data) {
-    console.log(data)
-  }
+afterUpdate.value = () => {
+  router.push({ path: '/cms/post' })
 }
 
 const category = ref()
-const getCategory = () => {
-  http.get('cms/category').then(r => {
+const getCategory = async () => {
+  await http.get('cms/category').then(r => {
     category.value = r.data.data
   })
 }
 
 const users = ref()
-const getUsers = () => {
-  http.get('users').then(r => {
+const getUsers = async () => {
+  await http.get('users').then(r => {
     users.value = r.data.data
   })
 }
 
-console.log()
+const show = async () => {
+  if (primary) {
+    loading.value = true
+    await http.get('/cms/post/' + primary).then(r => {
+      nextTick(() => {
+        formData.value = r.data.data
+        loading.value = false
+      })
+    })
+  }
+}
 onMounted(() => {
   getCategory()
   getUsers()
+  show()
 })
 </script>
 

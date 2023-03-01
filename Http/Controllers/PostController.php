@@ -37,9 +37,14 @@ class PostController extends Controller
         return $this->model->updateBy($id, $request->all());
     }
 
-    public function destroy($id)
+    /**
+     * 删除
+     * @param $id
+     * @return bool
+     */
+    public function destroy($id): bool
     {
-        return $this->model->deleteBy($id);
+        return $this->model->deletesBy($id);
     }
 
     /**
@@ -48,8 +53,8 @@ class PostController extends Controller
      * @param $id
      * @return bool
      */
-    public function enable($id)
+    public function enable($id): bool
     {
-        return $this->model->toggleBy($id);
+        return $this->model->togglesBy($id);
     }
 }

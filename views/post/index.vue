@@ -10,7 +10,7 @@
     <div class="table-default">
       <div class="pt-5 pl-2">
         <router-link to="/cms/post/create">
-          <Add />
+          <Add text="创建文章" />
         </router-link>
       </div>
       <el-table :data="tableData" class="mt-3" v-loading="loading" @selection-change="handleSelectionChange">
@@ -69,7 +69,7 @@ onMounted(() => {
 })
 
 // 多选
-const multiSelect = ref()
+const multiSelect = ref([])
 const handleSelectionChange = posts => {
   multiSelect.value = posts
 }
@@ -79,7 +79,11 @@ const multiDel = () => {
   multiSelect.value.forEach(item => {
     ids += item.id + ','
   })
-  destroy('/cms/post', ids.substring(0, ids.length - 1))
+  if (ids.length === 0) {
+    Message.error('请选择删除的文章')
+  } else {
+    destroy('/cms/post', ids.substring(0, ids.length - 1))
+  }
 }
 
 const multiPublish = () => {

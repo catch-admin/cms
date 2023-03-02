@@ -15,7 +15,7 @@
           >
             <el-input v-model="formData.title" name="title" clearable />
           </el-form-item>
-          <el-form-item label="摘录" prop="excerpt">
+          <el-form-item label="摘录" prop="excerpt" v-if="formData.type === 1">
             <el-input v-model="formData.excerpt" name="excerpt" clearable type="textarea" />
           </el-form-item>
 
@@ -61,20 +61,40 @@
               <el-option v-for="user in users" :key="user.id" :label="user.username" :value="user.id" />
             </el-select>
           </el-form-item>
-          <el-form-item label="可见性" prop="status" class="mt-6">
+          <el-form-item label="可见性" prop="status" class="mt-6" v-if="formData.type === 1">
             <el-select v-model="formData.visible" placeholder="选择可见性">
               <el-option label="公开" :value="1" />
               <el-option label="私密" :value="2" />
               <el-option label="密码查看" :value="3" />
             </el-select>
           </el-form-item>
-          <el-form-item label="查看密码" prop="password" v-if="formData.visible === 3" class="mt-6">
+          <el-form-item label="查看密码" prop="password" v-if="formData.visible === 3 && formData.type === 1" class="mt-6">
             <el-input v-model="formData.password" name="password" clearable placeholder="输入查看密码" />
+          </el-form-item>
+          <el-form-item
+            label="标签"
+            prop="tags"
+            class="mt-6"
+            v-if="formData.type === 1"
+            :rules="[
+              {
+                required: true,
+                message: '至少填写一个标签',
+              },
+            ]"
+          >
+            <el-select v-model="formData.tags" multiple filterable allow-create placeholder="输入标签" />
           </el-form-item>
           <el-form-item label="可评论" prop="is_can_comment" class="mt-6">
             <el-radio-group v-model="formData.is_can_comment">
-              <el-radio-button label="1">是</el-radio-button>
-              <el-radio-button label="2">否</el-radio-button>
+              <el-radio-button :label="1">是</el-radio-button>
+              <el-radio-button :label="2">否</el-radio-button>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="类型" prop="type" class="mt-6">
+            <el-radio-group v-model="formData.type">
+              <el-radio-button :label="1">文章</el-radio-button>
+              <el-radio-button :label="2">页面</el-radio-button>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="状态" prop="status" class="mt-6">
@@ -83,7 +103,7 @@
               <el-radio-button label="2">草稿</el-radio-button>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="置顶" prop="top" class="mt-6">
+          <el-form-item label="置顶" prop="top" class="mt-6" v-if="formData.type === 1">
             <el-radio-group v-model="formData.top">
               <el-radio-button label="1">分类</el-radio-button>
               <el-radio-button label="2">首页</el-radio-button>
@@ -93,9 +113,7 @@
           <el-form-item label="排序" prop="order" class="mt-6">
             <el-input-number v-model="formData.order" name="order" clearable :min="1" />
           </el-form-item>
-          <el-form-item label="标签" prop="order" class="mt-6">
-            <el-select v-model="formData.tags" multiple filterable allow-create placeholder="输入标签" />
-          </el-form-item>
+
           <div class="bg-white dark:bg-regal-dark">
             <div class="p-3 flex justify-center">
               <router-link to="/cms/post">
@@ -119,13 +137,14 @@ import router from '/admin/router'
 const primary = router.currentRoute.value.params.id
 
 const api = '/cms/post'
-const createPost = ref()
 
 const { formData, form, loading, submitForm, afterCreate, afterUpdate } = useCreate(api, primary)
 // 默认可评论
 formData.value.is_can_comment = 1
 formData.value.order = 1
 formData.value.status = 2
+formData.value.type = 1
+
 afterCreate.value = () => {
   router.push({ path: '/cms/post' })
 }

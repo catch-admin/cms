@@ -29,12 +29,20 @@ class PostController extends Controller
 
     public function show($id)
     {
-        return $this->model->firstBy($id);
+        $post = $this->model->firstBy($id);
+
+        $post->tags = $post->tags()->get()->pluck('name');
+
+        return $post;
     }
 
     public function update($id, Request $request)
     {
-        return $this->model->updateBy($id, $request->all());
+       if($this->model->updateBy($id, $request->all())) {
+           $this->model->savePostTags($this->model->firstBy($id));
+       }
+
+       return true;
     }
 
     /**

@@ -101,7 +101,7 @@ class Post extends Model
      *
      * @param Post $post
      */
-    protected function savePostTags(Post $post)
+    public function savePostTags(Post $post)
     {
         $tagNames = Request::get('tags');
 

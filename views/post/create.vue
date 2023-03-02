@@ -146,10 +146,10 @@ formData.value.status = 2
 formData.value.type = 1
 
 afterCreate.value = () => {
-  router.push({ path: '/cms/post' })
+  router.push({ path: '/cms/articles/post' })
 }
 afterUpdate.value = () => {
-  router.push({ path: '/cms/post' })
+  router.push({ path: '/cms/articles/post' })
 }
 
 const category = ref()

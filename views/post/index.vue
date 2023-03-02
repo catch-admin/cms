@@ -9,7 +9,7 @@
     </Search>
     <div class="table-default">
       <div class="pt-5 pl-2">
-        <router-link to="/cms/post/create">
+        <router-link to="/cms/articles/create">
           <Add text="创建文章" />
         </router-link>
       </div>

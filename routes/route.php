@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Cms\Http\Controllers\CategoryController;
 use Modules\Cms\Http\Controllers\PostController;
 use Modules\Cms\Http\Controllers\TagController;
+use Modules\Cms\Http\Controllers\SettingController;
 
 Route::prefix('cms')->group(function(){
 
@@ -11,9 +12,13 @@ Route::prefix('cms')->group(function(){
 
 	Route::apiResource('post', PostController::class);
     Route::put('post/enable/{id}', [PostController::class, 'enable']);
-    
+
 	Route::apiResource('tag', TagController::class);
-	//next
+
+    Route::post('setting', [SettingController::class, 'store']);
+    Route::get('setting', [SettingController::class, 'index']);
+
+    //next
 });
 
 

@@ -58,6 +58,12 @@ const router: RouteRecordRaw[] = [
           },
         ],
       },
+      {
+        path: 'resources',
+        name: 'cms-resources',
+        meta: { title: '资源管理', icon: 'server-stack' },
+        component: () => import('./resource/index.vue'),
+      },
     ],
   },
 ]

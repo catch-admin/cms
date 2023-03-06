@@ -80,27 +80,14 @@
 <script setup lang="ts">
 import Layout from '../layout.vue'
 import { useCreate } from '/admin/composables/curd/useCreate'
-import { useShow } from '/admin/composables/curd/useShow'
-import { onMounted } from 'vue'
 import http from '/admin/support/http'
 const api = '/cms/setting'
+
 const { formData, form, loading, submitForm } = useCreate(api)
 
 const avatar_proxy = 'https://gravatar.loli.net'
 
 const defaultAvatar = '/avatar/2a2978369685974b4a90c0ef0e84a304'
-
-formData.value.site_most_article_number = 10
-formData.value.site_homepage_show = 1
-formData.value.site_comment_per_page = 10
-formData.value.site_comment_limit = true
-formData.value.site_comment_need_email = true
-formData.value.site_comment_need_login = false
-formData.value.site_comment_nested = false
-formData.value.site_comment_order_desc = true
-formData.value.site_comment_check = true
-formData.value.site_comment_avatar_proxy = avatar_proxy
-formData.value.site_comment_avatar = 'mm'
 
 const undefinedAvatar = avatar_proxy + defaultAvatar + '?d=mm'
 const identiconAvatar = avatar_proxy + defaultAvatar + '?d=identicon'
@@ -108,4 +95,8 @@ const wavatarAvatar = avatar_proxy + defaultAvatar + '?d=wavatar'
 const monsteridAvatar = avatar_proxy + defaultAvatar + '?d=monsterid'
 const retroAvatar = avatar_proxy + defaultAvatar + '?d=retro'
 const robohashAvatar = avatar_proxy + defaultAvatar + '?d=robohash'
+
+http.get('cms/setting').then(r => {
+  formData.value = r.data.data
+})
 </script>

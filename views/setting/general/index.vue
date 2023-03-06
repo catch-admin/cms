@@ -17,9 +17,11 @@
           </el-form-item>
 
           <el-form-item label="站点Logo" prop="site_logo">
-            <Upload class="w-28" action="upload/image" :show-file-list="false" name="image">
-              <img :src="formData.site_logo" v-if="formData.site_logo" />
-              <el-button type="primary" v-else>选择 Logo</el-button>
+            <Upload class="w-28" action="upload/image" :show-file-list="false" name="image" :onSuccess="uploadSuccess">
+              <div class="flex flex-col">
+                <img :src="formData.site_logo" v-if="formData.site_logo" />
+                <el-button type="primary" v-else>选择 Logo</el-button>
+              </div>
             </Upload>
           </el-form-item>
 
@@ -75,11 +77,16 @@
 <script setup lang="ts">
 import Layout from '../layout.vue'
 import { useCreate } from '/admin/composables/curd/useCreate'
-import { onMounted } from 'vue'
 import http from '/admin/support/http'
 const api = '/cms/setting'
+
 const { formData, form, loading, submitForm } = useCreate(api)
-formData.value.site_url = 'https://'
-formData.value.site_date_format = '年-月-日'
-formData.value.site_time_format = 'H:i'
+
+http.get('cms/setting').then(r => {
+  formData.value = r.data.data
+})
+
+const uploadSuccess = r => {
+  formData.value.site_logo = r.data.path
+}
 </script>

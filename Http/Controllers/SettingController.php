@@ -11,25 +11,31 @@ class SettingController extends Controller
 {
     public function index()
     {
-        return Option::get(['key', 'value']);
+        $options = [];
+
+        Option::get(['key', 'value'])
+            ->each(function ($item) use (&$options){
+                $options[$item->key] = $item->value;
+            });
+
+        return $options;
     }
+
     public function store(Request $request)
     {
         $optionKeys = Option::pluck('key');
 
         foreach ($request->all() as $key => $value) {
-            if (is_bool($value)) {
-                $value = intval($value);
-            }
-
             if ($optionKeys->contains($key)) {
                 Option::where('key', $key)->update([
-                    'value' => $value
+                    'value' => $value,
+                    'creator_id' => $this->getLoginUserId()
                 ]);
             } else {
                 app(Option::class)->storeBy([
                     'key' => $key,
-                    'value' => $value
+                    'value' => $value,
+                    'creator_id' => $this->getLoginUserId()
                 ]);
             }
         }

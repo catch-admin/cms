@@ -41,6 +41,11 @@ return new class extends Seeder
             'site_homepage_show' => 1,
             'site_comment_avatar_proxy' => 'https://gravatar.loli.net',
             'site_most_article_number' => 10,
+
+            'site_category_types' => json_encode([
+                ['name' => '文章', 'value' => 1, 'template' => 'post', 'is_default' => true],
+                ['name' => '链接', 'value' => 2, 'template' => null, 'is_default' => true]
+            ], JSON_UNESCAPED_UNICODE)
         ];
     }
 

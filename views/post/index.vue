@@ -28,7 +28,7 @@
         <el-table-column prop="updated_at" label="更新时间" width="200" />
         <el-table-column label="操作" width="200">
           <template #default="scope">
-            <router-link :to="'/cms/post/create/' + scope.row.id">
+            <router-link :to="'/cms/articles/create/' + scope.row.id">
               <Update />
             </router-link>
             <Destroy @click="destroy(api, scope.row.id)" class="ml-2" />

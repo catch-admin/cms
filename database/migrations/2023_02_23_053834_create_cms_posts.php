@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('category_id')->nullable(false)->comment('分类ID');
             $table->string('author')->comment('作者');
             $table->string('title')->comment('标题');
+            $table->string('cover')->default('')->comment('封面');
             $table->longText('content')->comment('内容');
             $table->tinyText('excerpt')->comment('摘录');
             $table->tinyInteger('status')->default(1)->comment('文章状态 1 草稿 2 发布');

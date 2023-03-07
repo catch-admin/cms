@@ -15,6 +15,14 @@
           >
             <el-input v-model="formData.title" name="title" clearable />
           </el-form-item>
+          <el-form-item label="封面" prop="cover">
+            <Upload class="w-28" action="upload/image" :show-file-list="false" name="image" :onSuccess="uploadSuccess">
+              <div class="flex flex-col">
+                <img :src="formData.cover" v-if="formData.cover" />
+                <div v-else class="text-sm text-indigo-500">选择封面</div>
+              </div>
+            </Upload>
+          </el-form-item>
           <el-form-item label="摘录" prop="excerpt" v-if="formData.type === 1">
             <el-input v-model="formData.excerpt" name="excerpt" clearable type="textarea" />
           </el-form-item>
@@ -182,6 +190,10 @@ onMounted(() => {
   getUsers()
   show()
 })
+
+const uploadSuccess = r => {
+  formData.value.cover = r.data.path
+}
 </script>
 
 <style scoped>

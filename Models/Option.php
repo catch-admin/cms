@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Modules\Cms\Models;
 
 use Catch\Base\CatchModel as Model;
+use Illuminate\Support\Str;
 
 /**
  * @property $id
@@ -47,6 +48,44 @@ class Option extends Model
             return (int) $value;
         }
 
+        if (Str::of($value)->isJson()) {
+            return json_decode($value, true);
+        }
+
         return $value;
+    }
+
+
+    /**
+     * get values
+     *
+     * @param string|array $keys
+     * @return array
+     */
+    public static function getValues(string|array $keys): array
+    {
+        $values = [];
+
+        self::when($keys <> '*', function ($query) use ($keys){
+            if (is_string($keys)) {
+                if (Str::of($keys)->contains(',')) {
+                    $keys = explode(',', $keys);
+                } else {
+                    $keys = [$keys];
+                }
+            }
+
+            $query->whereIn('key', $keys);
+        })
+        ->get()
+        ->each(function ($item) use (&$values){
+           $values[$item->key] = $item->value;
+        });
+
+        if (count($values) === 1) {
+            return $values[$keys];
+        }
+
+        return $values;
     }
 }

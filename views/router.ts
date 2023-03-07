@@ -32,9 +32,9 @@ const router: RouteRecordRaw[] = [
             component: () => import('./tag/index.vue'),
           },
           {
-            path: '/create/:id?',
+            path: 'create/:id?',
             name: 'create-post',
-            meta: { title: '创建文章', icon: 'wrench', hidden: true, active_menu: '/cms/post' },
+            meta: { title: '创建文章', icon: 'wrench', hidden: true, active_menu: '/cms/articles/post' },
             component: () => import('./post/create.vue'),
           },
         ],
@@ -53,8 +53,14 @@ const router: RouteRecordRaw[] = [
           {
             path: 'content',
             name: 'setting-content',
-            meta: { title: '内容', icon: 'cog-6-tooth' },
+            meta: { title: '内容', icon: 'cube' },
             component: () => import('./setting/content/index.vue'),
+          },
+          {
+            path: 'other',
+            name: 'setting-other',
+            meta: { title: '其他', icon: 'cube' },
+            component: () => import('./setting/other/index.vue'),
           },
         ],
       },

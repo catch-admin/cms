@@ -17,6 +17,11 @@
             <el-tag>{{ scope.row.slug }} </el-tag>
           </template>
         </el-table-column>
+        <el-table-column label="链接">
+          <template #default="scope">
+            <el-link :href="scope.row.url" target="_blank">{{ scope.row.url }} </el-link>
+          </template>
+        </el-table-column>
         <el-table-column prop="post_count" label="文章数量" />
         <el-table-column prop="created_at" label="创建时间" />
         <el-table-column label="操作" width="200">

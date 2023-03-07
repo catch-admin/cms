@@ -35,7 +35,7 @@ class Post extends Model
 {
     protected $table = 'cms_posts';
 
-    protected $fillable = [ 'id', 'category_id', 'author', 'title', 'content', 'excerpt', 'status', 'is_can_comment', 'visible', 'top','password', 'order', 'user_id', 'type', 'comment_count', 'creator_id', 'created_at', 'updated_at', 'deleted_at' ];
+    protected $fillable = [ 'id', 'category_id', 'author', 'title', 'cover', 'content', 'excerpt', 'status', 'is_can_comment', 'visible', 'top','password', 'order', 'user_id', 'type', 'comment_count', 'creator_id', 'created_at', 'updated_at', 'deleted_at' ];
 
     /**
      * @var array
@@ -45,7 +45,7 @@ class Post extends Model
     /**
      * @var array
      */
-    protected array $form = ['category_id', 'author','title','content','excerpt','status','visible', 'top', 'is_can_comment','password','order'];
+    protected array $form = ['category_id', 'author','title','cover','content','excerpt','status','visible', 'top', 'is_can_comment','password','order'];
 
     /**
      * booted

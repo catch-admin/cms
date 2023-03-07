@@ -5,6 +5,12 @@
         <el-form-item label="名称" prop="name">
           <el-input v-model="query.name" name="name" clearable />
         </el-form-item>
+        <el-form-item label="类型" prop="type">
+          <el-select v-model="query.type" placeholder="请选择">
+            <el-option :value="1" label="轮播图" />
+            <el-option :value="2" label="友情链接" />
+          </el-select>
+        </el-form-item>
       </template>
     </Search>
     <div class="table-default">

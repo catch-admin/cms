@@ -17,7 +17,7 @@ Route::prefix('cms')->group(function(){
 	Route::apiResource('tag', TagController::class);
 
     Route::post('setting', [SettingController::class, 'store']);
-    Route::get('setting', [SettingController::class, 'index']);
+    Route::get('setting/{key?}', [SettingController::class, 'index']);
 
 
 	Route::apiResource('resource', ResourceController::class);

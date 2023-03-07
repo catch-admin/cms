@@ -26,13 +26,13 @@
       ]"
     >
       <el-input v-model="formData.slug" name="slug" clearable />
-      <div class="text-sm text-gray-300">别名可以自定义分类名称, 通常只包含字母、数字和"_,-"连字符</div>
+      <div class="text-[6px] text-gray-300">别名可以自定义分类名称, 通常只包含字母、数字和"_,-"连字符</div>
+      <div class="text-[6px] text-gray-300">别名可以自定义作 url 短链接使用，所以分类是可以自定义链接的</div>
     </el-form-item>
     <el-form-item label="类型" prop="type">
-      <el-radio-group v-model="formData.type">
-        <el-radio :label="1">文章</el-radio>
-        <el-radio :label="2">链接</el-radio>
-      </el-radio-group>
+      <el-select v-model="formData.type" placeholder="选择类型">
+        <el-option v-for="item in cateTypes" :key="item.value" :label="item.name" :value="item.value" />
+      </el-select>
     </el-form-item>
     <el-form-item
       label="链接地址"
@@ -88,9 +88,18 @@ const getCategory = () => {
     category.value = r.data.data
   })
 }
+
+const cateTypes = ref([])
+const getCategoryTypes = () => {
+  http.get('cms/setting/site_category_types').then(r => {
+    cateTypes.value = r.data.data
+  })
+}
 const emit = defineEmits(['close'])
 getCategory()
 onMounted(() => {
   close(() => emit('close'))
+
+  getCategoryTypes()
 })
 </script>

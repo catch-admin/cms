@@ -43,7 +43,6 @@ class Resource extends Model
      */
     public array $searchable = [
         'name' => 'like',
+        'type' => '='
     ];
-
-
 }

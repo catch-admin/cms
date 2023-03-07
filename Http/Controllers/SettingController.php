@@ -9,16 +9,9 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function index()
+    public function index(string $key = '*')
     {
-        $options = [];
-
-        Option::get(['key', 'value'])
-            ->each(function ($item) use (&$options){
-                $options[$item->key] = $item->value;
-            });
-
-        return $options;
+        return Option::getValues($key);
     }
 
     public function store(Request $request)

@@ -3,7 +3,10 @@
     <Search :search="search" :reset="reset">
       <template v-slot:body>
         <el-form-item label="标题">
-          <el-input v-model="query.title" clearable />
+          <el-input v-model="query.title" clearable placeholder="请输入标题" />
+        </el-form-item>
+        <el-form-item label="分类">
+          <el-tree-select v-model="query.category_id" value-key="id" placeholder="选择分类" clearable :data="categories" check-strictly :props="{ value: 'id', label: 'name' }" />
         </el-form-item>
       </template>
     </Search>
@@ -103,4 +106,9 @@ const multiPublish = () => {
     })
   }
 }
+
+const categories = ref()
+http.get('cms/category').then(r => {
+  categories.value = r.data.data
+})
 </script>

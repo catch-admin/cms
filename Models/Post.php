@@ -90,8 +90,11 @@ class Post extends Model
                         'author' => User::whereColumn('author', 'users.id')->select('username')->limit(1)
                     ])
                     ->orderByDesc('id')
-                    ->when(Request::get('title'), function ($query){
-                        $query->whereLike('title', Request::get('title'));
+                    ->when($title = Request::get('title'), function ($query) use ($title){
+                        $query->whereLike('title', $title);
+                    })
+                    ->when($categoryId = Request::get('category_id'), function ($query) use ($categoryId){
+                        $query->where('category_id', $categoryId);
                     })
                     ->paginate(Request::get('limit', 10));
     }

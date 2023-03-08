@@ -21,8 +21,44 @@
           <div class="flex justify-center w-full">
             <el-button type="primary" class="ml-5 w-[5rem]" @click="addCateType"><Icon name="plus" className="w-4 h-4" />新增</el-button>
           </div>
-          <el-divider />
+
+          <el-divider content-position="center">URL 设置</el-divider>
+
+          <el-form-item label="简洁模式">
+            <el-radio-group v-model="formData.is_simple_url">
+              <el-radio-button :label="1" size="small">是</el-radio-button>
+              <el-radio-button :label="2" size="small">否</el-radio-button>
+            </el-radio-group>
+            <div class="text-[5px] text-gray-400 pl-3">针对分类多级URL(/a/b)，只使用最后一级(/b)</div>
+          </el-form-item>
+          <el-form-item label="链接结构">
+            <el-radio-group v-model="formData.site_url_struct" class="flex flex-col justify-center">
+              <div class="w-full">
+                <el-radio :label="4">动态模式<span class="text-[6px] text-gray-400 ml-3">https://domain.com/post?id=1</span> </el-radio>
+              </div>
+              <div class="w-full">
+                <el-radio :label="3">静态模式<span class="text-[6px] text-gray-400 ml-3">https://domain.com/post/{id}</span> </el-radio>
+              </div>
+              <div class="w-full">
+                <el-radio :label="2"
+                  >月日结构 <span class="text-[6px] text-gray-400 ml-3">https://domain.com/{{ date.getMonth() }}/{{ date.getDay() }}/{id}</span>
+                </el-radio>
+              </div>
+              <div class="w-full">
+                <el-radio :label="1"
+                  >年月日结构 <span class="text-[6px] text-gray-400 ml-3">https://domain.com/{{ date.getFullYear() }}/{{ date.getMonth() }}/{{ date.getDay() }}/{id}</span>
+                </el-radio>
+              </div>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item label="URL后缀">
+            <el-input placeholder="URL后缀" v-model="formData.site_url_suffix" style="width: 200px" />
+            <div class="text-[5px] text-gray-400 ml-3">例如: html, asp, php 等等后缀，但是在动态模式下无效</div>
+          </el-form-item>
         </div>
+        <el-divider content-position="center" />
+
         <div class="bg-white dark:bg-regal-dark flex justify-center mb-3">
           <el-button type="primary" @click="submitForm(form)" class="ml-5 w-[10rem]">保 存</el-button>
         </div>
@@ -39,6 +75,12 @@ import http from '/admin/support/http'
 const api = '/cms/setting'
 
 const { formData, form, loading, submitForm } = useCreate(api)
+formData.value.site_url_struct = 1
+formData.value.is_simple_url = 2
+
+const date = new Date()
+
+console.log(date.getFullYear())
 
 http.get('cms/setting').then(r => {
   formData.value = r.data.data

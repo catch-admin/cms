@@ -45,7 +45,11 @@ return new class extends Seeder
             'site_category_types' => json_encode([
                 ['name' => '文章', 'value' => 1, 'template' => 'post', 'is_default' => true],
                 ['name' => '链接', 'value' => 2, 'template' => null, 'is_default' => true]
-            ], JSON_UNESCAPED_UNICODE)
+            ], JSON_UNESCAPED_UNICODE),
+
+            'site_url_struct' => 3,
+
+            'is_simple_url' => 2,
         ];
     }
 

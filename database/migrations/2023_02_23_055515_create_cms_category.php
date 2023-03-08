@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('order')->default(1)->comment('排序 默认 1');
             $table->integer('post_count')->default(0)->comment('文章数量');
             $table->tinyInteger('type')->default(1)->comment('1 文章 2 链接');
-            $table->tinyInteger('href')->default('')->comment('链接地址');
+            $table->string('href')->default('')->comment('链接地址');
             $table->creatorId();
             $table->createdAt();
             $table->updatedAt();

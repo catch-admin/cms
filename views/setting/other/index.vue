@@ -34,18 +34,18 @@
           <el-form-item label="链接结构">
             <el-radio-group v-model="formData.site_url_struct" class="flex flex-col justify-center">
               <div class="w-full">
-                <el-radio :label="4">动态模式<span class="text-[6px] text-gray-400 ml-3">https://domain.com/post?id=1</span> </el-radio>
+                <el-radio :label="1">动态模式<span class="text-[6px] text-gray-400 ml-3">https://domain.com/post?id=1</span> </el-radio>
               </div>
               <div class="w-full">
-                <el-radio :label="3">静态模式<span class="text-[6px] text-gray-400 ml-3">https://domain.com/post/{id}</span> </el-radio>
+                <el-radio :label="2">静态模式<span class="text-[6px] text-gray-400 ml-3">https://domain.com/post/{id}</span> </el-radio>
               </div>
               <div class="w-full">
-                <el-radio :label="2"
+                <el-radio :label="3"
                   >月日结构 <span class="text-[6px] text-gray-400 ml-3">https://domain.com/{{ date.getMonth() }}/{{ date.getDay() }}/{id}</span>
                 </el-radio>
               </div>
               <div class="w-full">
-                <el-radio :label="1"
+                <el-radio :label="4"
                   >年月日结构 <span class="text-[6px] text-gray-400 ml-3">https://domain.com/{{ date.getFullYear() }}/{{ date.getMonth() }}/{{ date.getDay() }}/{id}</span>
                 </el-radio>
               </div>

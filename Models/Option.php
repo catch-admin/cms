@@ -5,6 +5,7 @@ namespace Modules\Cms\Models;
 
 use Catch\Base\CatchModel as Model;
 use Illuminate\Support\Str;
+use mysql_xdevapi\Schema;
 
 /**
  * @property $id
@@ -60,9 +61,9 @@ class Option extends Model
      * get values
      *
      * @param string|array $keys
-     * @return array
+     * @return array|string|int
      */
-    public static function getValues(string|array $keys): array
+    public static function getValues(string|array $keys): mixed
     {
         $values = [];
 

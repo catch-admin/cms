@@ -5,7 +5,6 @@ namespace Modules\Cms\Models;
 
 use Catch\Base\CatchModel as Model;
 use Illuminate\Support\Str;
-use mysql_xdevapi\Schema;
 
 /**
  * @property $id
@@ -67,24 +66,31 @@ class Option extends Model
     {
         $values = [];
 
-        self::when($keys <> '*', function ($query) use ($keys){
-            if (is_string($keys)) {
-                if (Str::of($keys)->contains(',')) {
-                    $keys = explode(',', $keys);
-                } else {
-                    $keys = [$keys];
-                }
+        // 批量查询
+        if (is_string($keys) && $keys[mb_strlen($keys) - 1] == '*') {
+            self::query()->where('key', 'like', str_replace('*', '%', $keys))->get()
+                        ->each(function ($item) use (&$values){
+                            $values[$item->key] = $item->value;
+                        });
+        } else {
+            self::when($keys <> '*', function ($query) use ($keys) {
+                                if (is_string($keys)) {
+                                    if (Str::of($keys)->contains(',')) {
+                                        $keys = explode(',', $keys);
+                                    } else {
+                                        $keys = [$keys];
+                                    }
+                                }
+                                $query->whereIn('key', $keys);
+                            })
+                            ->get()
+                            ->each(function ($item) use (&$values) {
+                                $values[$item->key] = $item->value;
+                            });
+
+            if (count($values) === 1) {
+                return $values[$keys];
             }
-
-            $query->whereIn('key', $keys);
-        })
-        ->get()
-        ->each(function ($item) use (&$values){
-           $values[$item->key] = $item->value;
-        });
-
-        if (count($values) === 1) {
-            return $values[$keys];
         }
 
         return $values;

@@ -53,8 +53,14 @@ const router: RouteRecordRaw[] = [
           {
             path: 'content',
             name: 'setting-content',
-            meta: { title: '内容', icon: 'cube' },
+            meta: { title: '内容', icon: 'user-circle' },
             component: () => import('./setting/content/index.vue'),
+          },
+          {
+            path: 'personal',
+            name: 'setting-personal',
+            meta: { title: '个人', icon: 'cube' },
+            component: () => import('./setting/personal/index.vue'),
           },
           {
             path: 'other',

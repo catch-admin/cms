@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function index(string $key = '*')
+    public function index(Request $request)
     {
-        return Option::getValues($key);
+        return Option::getValues($request->get('key', '*'));
     }
 
     public function store(Request $request)

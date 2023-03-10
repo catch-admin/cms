@@ -1,28 +1,36 @@
 <template>
   <div class="w-full" v-loading="loading">
-    <el-form :model="formData" label-width="120px" ref="form" class="pr-4 w-full bg-white dark:bg-regal-dark pt-5">
-      <div class="flex flex-row">
+    <el-form :model="formData" label-width="100px" ref="form" class="pr-4 w-full bg-white dark:bg-regal-dark pt-5">
+      <div class="flex md:flex-row">
         <div class="w-full">
-          <el-form-item
-            label="标题"
-            prop="title"
-            :rules="[
-              {
-                required: true,
-                message: '文章标题必须填写',
-              },
-            ]"
-          >
-            <el-input v-model="formData.title" name="title" clearable />
-          </el-form-item>
-          <el-form-item label="封面" prop="cover">
-            <Upload class="w-28" action="upload/image" :show-file-list="false" name="image" :onSuccess="uploadSuccess">
-              <div class="flex flex-col">
-                <img :src="formData.cover" v-if="formData.cover" />
-                <div v-else class="text-sm text-indigo-500">选择封面</div>
-              </div>
-            </Upload>
-          </el-form-item>
+          <div class="flex flex-row justify-between">
+            <div class="w-3/4">
+              <el-form-item
+                label="标题"
+                prop="title"
+                :rules="[
+                  {
+                    required: true,
+                    message: '文章标题必须填写',
+                  },
+                ]"
+              >
+                <el-input v-model="formData.title" name="title" clearable />
+              </el-form-item>
+            </div>
+            <el-form-item
+              label="选择分类"
+              prop="category_id"
+              :rules="[
+                {
+                  required: true,
+                  message: '请先选择分类',
+                },
+              ]"
+            >
+              <el-tree-select v-model="formData.category_id" value-key="id" placeholder="选择分类" clearable class="w-full" :data="category" check-strictly :props="{ value: 'id', label: 'name' }" />
+            </el-form-item>
+          </div>
           <el-form-item label="摘录" prop="excerpt" v-if="formData.type === 1">
             <el-input v-model="formData.excerpt" name="excerpt" clearable type="textarea" />
           </el-form-item>
@@ -41,19 +49,7 @@
             <el-input v-model="formData.content" class="invisible" />
           </el-form-item>
         </div>
-        <div class="w-[27rem]">
-          <el-form-item
-            label="选择分类"
-            prop="category_id"
-            :rules="[
-              {
-                required: true,
-                message: '请先选择分类',
-              },
-            ]"
-          >
-            <el-tree-select v-model="formData.category_id" value-key="id" placeholder="选择分类" clearable class="w-full" :data="category" check-strictly :props="{ value: 'id', label: 'name' }" />
-          </el-form-item>
+        <div class="w-1/3">
           <el-form-item
             class="mt-6"
             label="作者"
@@ -68,6 +64,14 @@
             <el-select v-model="formData.author" placeholder="选择作者">
               <el-option v-for="user in users" :key="user.id" :label="user.username" :value="user.id" />
             </el-select>
+          </el-form-item>
+          <el-form-item label="封面" prop="cover">
+            <Upload class="w-28" action="upload/image" :show-file-list="false" name="image" :onSuccess="uploadSuccess">
+              <div class="flex flex-col">
+                <img :src="formData.cover" v-if="formData.cover" />
+                <div v-else class="text-sm text-indigo-500">选择封面</div>
+              </div>
+            </Upload>
           </el-form-item>
           <el-form-item label="可见性" prop="status" class="mt-6" v-if="formData.type === 1">
             <el-select v-model="formData.visible" placeholder="选择可见性">
@@ -124,7 +128,7 @@
 
           <div class="bg-white dark:bg-regal-dark">
             <div class="p-3 flex justify-center">
-              <router-link to="/cms/post">
+              <router-link to="/cms/articles/post">
                 <el-button>取消</el-button>
               </router-link>
               <el-button type="primary" @click="submitForm(form)" class="ml-5">保存</el-button>

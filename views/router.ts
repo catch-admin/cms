@@ -2,6 +2,7 @@ import { RouteRecordRaw } from 'vue-router'
 
 // @ts-ignore
 // @ts-ignore
+/**
 const router: RouteRecordRaw[] = [
   {
     path: '/cms',
@@ -81,3 +82,4 @@ const router: RouteRecordRaw[] = [
 ]
 
 export default router
+ */

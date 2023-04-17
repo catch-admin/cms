@@ -80,8 +80,6 @@ formData.value.is_simple_url = 2
 
 const date = new Date()
 
-console.log(date.getFullYear())
-
 http.get('cms/setting').then(r => {
   formData.value = r.data.data
 })

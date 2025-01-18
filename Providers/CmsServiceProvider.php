@@ -17,4 +17,14 @@ class CmsServiceProvider extends CatchModuleServiceProvider
         // TODO: Implement path() method.
         return 'Cms';
     }
+
+    public function boot(): void
+    {
+        $frontViewPath = config('catch.views_path');
+
+        // 发布 cms view
+        $this->publishes([
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' => $frontViewPath . 'cms',
+        ], 'cms-views');
+    }
 }

@@ -3,6 +3,7 @@
 namespace Modules\Cms;
 
 use Catch\Support\Module\Installer as ModuleInstaller;
+use Illuminate\Support\Facades\Artisan;
 use Modules\Cms\Providers\CmsServiceProvider;
 
 class Installer extends ModuleInstaller
@@ -18,6 +19,15 @@ class Installer extends ModuleInstaller
             'description' => '内容管理模块',
             'provider' => CmsServiceProvider::class
         ];
+    }
+
+    public function install(): void
+    {
+        parent::install();
+
+        Artisan::call('vendor:publish', [
+            '--tag' => 'cms-views',
+        ]);
     }
 
     protected function requirePackages(): void

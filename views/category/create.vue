@@ -58,10 +58,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useCreate } from '/admin/composables/curd/useCreate'
-import { useShow } from '/admin/composables/curd/useShow'
+import { useCreate } from '@/composables/curd/useCreate'
+import { useShow } from '@/composables/curd/useShow'
 import { onMounted, ref } from 'vue'
-import http from '/admin/support/http'
+import http from '@/support/http'
 
 const props = defineProps({
   primary: String | Number,

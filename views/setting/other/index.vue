@@ -70,8 +70,8 @@
 <script setup lang="ts">
 import Layout from '../layout.vue'
 
-import { useCreate } from '/admin/composables/curd/useCreate'
-import http from '/admin/support/http'
+import { useCreate } from '@/composables/curd/useCreate'
+import http from '@/support/http'
 const api = '/cms/setting'
 
 const { formData, form, loading, submitForm } = useCreate(api)

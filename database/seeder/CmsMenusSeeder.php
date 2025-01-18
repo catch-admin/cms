@@ -20,7 +20,7 @@ return new class extends Seeder
     public function menus(): array
     {
         return array (
-  0 => 
+  0 =>
   array (
     'id' => 45,
     'parent_id' => 0,
@@ -29,7 +29,7 @@ return new class extends Seeder
     'icon' => 'newspaper',
     'module' => 'cms',
     'permission_mark' => '',
-    'component' => '/admin/layout/index.vue',
+    'component' => '/layout/index.vue',
     'redirect' => NULL,
     'keepalive' => 1,
     'type' => 1,
@@ -40,9 +40,9 @@ return new class extends Seeder
     'created_at' => 1681709347,
     'updated_at' => 1681709347,
     'deleted_at' => 0,
-    'children' => 
+    'children' =>
     array (
-      0 => 
+      0 =>
       array (
         'id' => 46,
         'parent_id' => 45,
@@ -62,9 +62,9 @@ return new class extends Seeder
         'created_at' => 1681709462,
         'updated_at' => 1681709462,
         'deleted_at' => 0,
-        'children' => 
+        'children' =>
         array (
-          0 => 
+          0 =>
           array (
             'id' => 53,
             'parent_id' => 46,
@@ -73,7 +73,7 @@ return new class extends Seeder
             'icon' => 'link',
             'module' => 'cms',
             'permission_mark' => 'category',
-            'component' => '/Cms/views/category/index.vue',
+            'component' => '/cms/category/index.vue',
             'redirect' => NULL,
             'keepalive' => 1,
             'type' => 2,
@@ -84,9 +84,9 @@ return new class extends Seeder
             'created_at' => 1681711643,
             'updated_at' => 1681711643,
             'deleted_at' => 0,
-            'children' => 
+            'children' =>
             array (
-              0 => 
+              0 =>
               array (
                 'id' => 58,
                 'parent_id' => 53,
@@ -107,7 +107,7 @@ return new class extends Seeder
                 'updated_at' => 1681711652,
                 'deleted_at' => 0,
               ),
-              1 => 
+              1 =>
               array (
                 'id' => 54,
                 'parent_id' => 53,
@@ -128,7 +128,7 @@ return new class extends Seeder
                 'updated_at' => 1681711652,
                 'deleted_at' => 0,
               ),
-              2 => 
+              2 =>
               array (
                 'id' => 56,
                 'parent_id' => 53,
@@ -149,7 +149,7 @@ return new class extends Seeder
                 'updated_at' => 1681711652,
                 'deleted_at' => 0,
               ),
-              3 => 
+              3 =>
               array (
                 'id' => 55,
                 'parent_id' => 53,
@@ -170,7 +170,7 @@ return new class extends Seeder
                 'updated_at' => 1681711652,
                 'deleted_at' => 0,
               ),
-              4 => 
+              4 =>
               array (
                 'id' => 57,
                 'parent_id' => 53,
@@ -193,7 +193,7 @@ return new class extends Seeder
               ),
             ),
           ),
-          1 => 
+          1 =>
           array (
             'id' => 59,
             'parent_id' => 46,
@@ -202,7 +202,7 @@ return new class extends Seeder
             'icon' => 'document-duplicate',
             'module' => 'cms',
             'permission_mark' => 'post',
-            'component' => '/Cms/views/post/index.vue',
+            'component' => '/cms/post/index.vue',
             'redirect' => NULL,
             'keepalive' => 1,
             'type' => 2,
@@ -213,9 +213,9 @@ return new class extends Seeder
             'created_at' => 1681711717,
             'updated_at' => 1681711717,
             'deleted_at' => 0,
-            'children' => 
+            'children' =>
             array (
-              0 => 
+              0 =>
               array (
                 'id' => 64,
                 'parent_id' => 59,
@@ -236,7 +236,7 @@ return new class extends Seeder
                 'updated_at' => 1681711727,
                 'deleted_at' => 0,
               ),
-              1 => 
+              1 =>
               array (
                 'id' => 65,
                 'parent_id' => 59,
@@ -257,7 +257,7 @@ return new class extends Seeder
                 'updated_at' => 1681711727,
                 'deleted_at' => 0,
               ),
-              2 => 
+              2 =>
               array (
                 'id' => 60,
                 'parent_id' => 59,
@@ -278,7 +278,7 @@ return new class extends Seeder
                 'updated_at' => 1681711727,
                 'deleted_at' => 0,
               ),
-              3 => 
+              3 =>
               array (
                 'id' => 62,
                 'parent_id' => 59,
@@ -299,7 +299,7 @@ return new class extends Seeder
                 'updated_at' => 1681711727,
                 'deleted_at' => 0,
               ),
-              4 => 
+              4 =>
               array (
                 'id' => 61,
                 'parent_id' => 59,
@@ -320,7 +320,7 @@ return new class extends Seeder
                 'updated_at' => 1681711727,
                 'deleted_at' => 0,
               ),
-              5 => 
+              5 =>
               array (
                 'id' => 63,
                 'parent_id' => 59,
@@ -343,7 +343,7 @@ return new class extends Seeder
               ),
             ),
           ),
-          2 => 
+          2 =>
           array (
             'id' => 72,
             'parent_id' => 46,
@@ -352,7 +352,7 @@ return new class extends Seeder
             'icon' => 'arrow-long-right',
             'module' => 'cms',
             'permission_mark' => 'post_create',
-            'component' => '/Cms/views/post/create.vue',
+            'component' => '/cms/post/create.vue',
             'redirect' => NULL,
             'keepalive' => 1,
             'type' => 2,
@@ -364,7 +364,7 @@ return new class extends Seeder
             'updated_at' => 1681720631,
             'deleted_at' => 0,
           ),
-          3 => 
+          3 =>
           array (
             'id' => 66,
             'parent_id' => 46,
@@ -373,7 +373,7 @@ return new class extends Seeder
             'icon' => 'code-bracket',
             'module' => 'cms',
             'permission_mark' => 'tag',
-            'component' => '/Cms/views/tag/index.vue',
+            'component' => '/cms/tag/index.vue',
             'redirect' => NULL,
             'keepalive' => 1,
             'type' => 2,
@@ -384,9 +384,9 @@ return new class extends Seeder
             'created_at' => 1681711813,
             'updated_at' => 1681711813,
             'deleted_at' => 0,
-            'children' => 
+            'children' =>
             array (
-              0 => 
+              0 =>
               array (
                 'id' => 71,
                 'parent_id' => 66,
@@ -407,7 +407,7 @@ return new class extends Seeder
                 'updated_at' => 1681711819,
                 'deleted_at' => 0,
               ),
-              1 => 
+              1 =>
               array (
                 'id' => 67,
                 'parent_id' => 66,
@@ -428,7 +428,7 @@ return new class extends Seeder
                 'updated_at' => 1681711819,
                 'deleted_at' => 0,
               ),
-              2 => 
+              2 =>
               array (
                 'id' => 69,
                 'parent_id' => 66,
@@ -449,7 +449,7 @@ return new class extends Seeder
                 'updated_at' => 1681711819,
                 'deleted_at' => 0,
               ),
-              3 => 
+              3 =>
               array (
                 'id' => 68,
                 'parent_id' => 66,
@@ -470,7 +470,7 @@ return new class extends Seeder
                 'updated_at' => 1681711819,
                 'deleted_at' => 0,
               ),
-              4 => 
+              4 =>
               array (
                 'id' => 70,
                 'parent_id' => 66,
@@ -495,7 +495,7 @@ return new class extends Seeder
           ),
         ),
       ),
-      1 => 
+      1 =>
       array (
         'id' => 86,
         'parent_id' => 45,
@@ -504,7 +504,7 @@ return new class extends Seeder
         'icon' => 'adjustments-horizontal',
         'module' => 'cms',
         'permission_mark' => 'resource',
-        'component' => '/Cms/views/resource/index.vue',
+        'component' => '/cms/resource/index.vue',
         'redirect' => NULL,
         'keepalive' => 1,
         'type' => 2,
@@ -515,9 +515,9 @@ return new class extends Seeder
         'created_at' => 1681713734,
         'updated_at' => 1681713734,
         'deleted_at' => 0,
-        'children' => 
+        'children' =>
         array (
-          0 => 
+          0 =>
           array (
             'id' => 91,
             'parent_id' => 86,
@@ -538,7 +538,7 @@ return new class extends Seeder
             'updated_at' => 1681713740,
             'deleted_at' => 0,
           ),
-          1 => 
+          1 =>
           array (
             'id' => 92,
             'parent_id' => 86,
@@ -559,7 +559,7 @@ return new class extends Seeder
             'updated_at' => 1681713740,
             'deleted_at' => 0,
           ),
-          2 => 
+          2 =>
           array (
             'id' => 87,
             'parent_id' => 86,
@@ -580,7 +580,7 @@ return new class extends Seeder
             'updated_at' => 1681713740,
             'deleted_at' => 0,
           ),
-          3 => 
+          3 =>
           array (
             'id' => 89,
             'parent_id' => 86,
@@ -601,7 +601,7 @@ return new class extends Seeder
             'updated_at' => 1681713740,
             'deleted_at' => 0,
           ),
-          4 => 
+          4 =>
           array (
             'id' => 88,
             'parent_id' => 86,
@@ -622,7 +622,7 @@ return new class extends Seeder
             'updated_at' => 1681713740,
             'deleted_at' => 0,
           ),
-          5 => 
+          5 =>
           array (
             'id' => 90,
             'parent_id' => 86,
@@ -645,7 +645,7 @@ return new class extends Seeder
           ),
         ),
       ),
-      2 => 
+      2 =>
       array (
         'id' => 73,
         'parent_id' => 45,
@@ -665,9 +665,9 @@ return new class extends Seeder
         'created_at' => 1681712437,
         'updated_at' => 1681712437,
         'deleted_at' => 0,
-        'children' => 
+        'children' =>
         array (
-          0 => 
+          0 =>
           array (
             'id' => 74,
             'parent_id' => 73,
@@ -676,7 +676,7 @@ return new class extends Seeder
             'icon' => 'list-bullet',
             'module' => 'cms',
             'permission_mark' => 'setting',
-            'component' => '/Cms/views/setting/general/index.vue',
+            'component' => '/cms/setting/general/index.vue',
             'redirect' => NULL,
             'keepalive' => 1,
             'type' => 2,
@@ -687,9 +687,9 @@ return new class extends Seeder
             'created_at' => 1681712534,
             'updated_at' => 1681712534,
             'deleted_at' => 0,
-            'children' => 
+            'children' =>
             array (
-              0 => 
+              0 =>
               array (
                 'id' => 75,
                 'parent_id' => 74,
@@ -710,7 +710,7 @@ return new class extends Seeder
                 'updated_at' => 1681712580,
                 'deleted_at' => 0,
               ),
-              1 => 
+              1 =>
               array (
                 'id' => 76,
                 'parent_id' => 74,
@@ -733,7 +733,7 @@ return new class extends Seeder
               ),
             ),
           ),
-          1 => 
+          1 =>
           array (
             'id' => 77,
             'parent_id' => 73,
@@ -742,7 +742,7 @@ return new class extends Seeder
             'icon' => 'qr-code',
             'module' => 'cms',
             'permission_mark' => 'setting_content',
-            'component' => '/Cms/views/setting/content/index.vue',
+            'component' => '/cms/setting/content/index.vue',
             'redirect' => NULL,
             'keepalive' => 1,
             'type' => 2,
@@ -753,9 +753,9 @@ return new class extends Seeder
             'created_at' => 1681712671,
             'updated_at' => 1681720966,
             'deleted_at' => 0,
-            'children' => 
+            'children' =>
             array (
-              0 => 
+              0 =>
               array (
                 'id' => 80,
                 'parent_id' => 77,
@@ -776,7 +776,7 @@ return new class extends Seeder
                 'updated_at' => 1681713339,
                 'deleted_at' => 0,
               ),
-              1 => 
+              1 =>
               array (
                 'id' => 81,
                 'parent_id' => 77,
@@ -799,7 +799,7 @@ return new class extends Seeder
               ),
             ),
           ),
-          2 => 
+          2 =>
           array (
             'id' => 79,
             'parent_id' => 73,
@@ -808,7 +808,7 @@ return new class extends Seeder
             'icon' => 'cog',
             'module' => 'cms',
             'permission_mark' => 'setting_other',
-            'component' => '/Cms/views/setting/other/index.vue',
+            'component' => '/cms/setting/other/index.vue',
             'redirect' => NULL,
             'keepalive' => 1,
             'type' => 2,
@@ -819,9 +819,9 @@ return new class extends Seeder
             'created_at' => 1681712766,
             'updated_at' => 1681720921,
             'deleted_at' => 0,
-            'children' => 
+            'children' =>
             array (
-              0 => 
+              0 =>
               array (
                 'id' => 84,
                 'parent_id' => 79,
@@ -842,7 +842,7 @@ return new class extends Seeder
                 'updated_at' => 1681713339,
                 'deleted_at' => 0,
               ),
-              1 => 
+              1 =>
               array (
                 'id' => 85,
                 'parent_id' => 79,
@@ -865,7 +865,7 @@ return new class extends Seeder
               ),
             ),
           ),
-          3 => 
+          3 =>
           array (
             'id' => 78,
             'parent_id' => 73,
@@ -874,7 +874,7 @@ return new class extends Seeder
             'icon' => 'user',
             'module' => 'cms',
             'permission_mark' => 'setting_personal',
-            'component' => '/Cms/views/setting/personal/index.vue',
+            'component' => '/cms/setting/personal/index.vue',
             'redirect' => NULL,
             'keepalive' => 1,
             'type' => 2,
@@ -885,9 +885,9 @@ return new class extends Seeder
             'created_at' => 1681712730,
             'updated_at' => 1681720943,
             'deleted_at' => 0,
-            'children' => 
+            'children' =>
             array (
-              0 => 
+              0 =>
               array (
                 'id' => 82,
                 'parent_id' => 78,
@@ -908,7 +908,7 @@ return new class extends Seeder
                 'updated_at' => 1681713339,
                 'deleted_at' => 0,
               ),
-              1 => 
+              1 =>
               array (
                 'id' => 83,
                 'parent_id' => 78,

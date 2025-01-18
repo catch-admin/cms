@@ -51,12 +51,12 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
-import { useGetList } from '/admin/composables/curd/useGetList'
-import { useDestroy } from '/admin/composables/curd/useDestroy'
-import { useOpen } from '/admin/composables/curd/useOpen'
-import Destroy from '/admin/components/admin/buttons/destroy.vue'
-import http from '/admin/support/http'
-import Message from '/admin/support/message'
+import { useGetList } from '@/composables/curd/useGetList'
+import { useDestroy } from '@/composables/curd/useDestroy'
+import { useOpen } from '@/composables/curd/useOpen'
+import Destroy from '@/components/admin/buttons/destroy.vue'
+import http from '@/support/http'
+import Message from '@/support/message'
 
 const api = 'cms/post'
 

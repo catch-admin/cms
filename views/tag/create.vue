@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useCreate } from '/admin/composables/curd/useCreate'
-import { useShow } from '/admin/composables/curd/useShow'
+import { useCreate } from '@/composables/curd/useCreate'
+import { useShow } from '@/composables/curd/useShow'
 import { onMounted } from 'vue'
 
 const props = defineProps({

@@ -29,19 +29,19 @@
               <el-radio-button :label="1" size="small">是</el-radio-button>
               <el-radio-button :label="2" size="small">否</el-radio-button>
             </el-radio-group>
-            <div class="text-[5px] text-gray-400 pl-3">针对分类多级URL(/a/b)，只使用最后一级(/b)</div>
+            <div class="text-[5rem] text-gray-400 pl-3">针对分类多级URL(/a/b)，只使用最后一级(/b)</div>
           </el-form-item>
           <el-form-item label="链接结构">
             <el-radio-group v-model="formData.site_url_struct" class="flex flex-col justify-center">
               <div class="w-full">
-                <el-radio :label="1">动态模式<span class="text-[6px] text-gray-400 ml-3">https://domain.com/post?id=1</span> </el-radio>
+                <el-radio :label="1">动态模式<span class="text-[6rem] text-gray-400 ml-3">https://domain.com/post?id=1</span> </el-radio>
               </div>
               <div class="w-full">
-                <el-radio :label="2">静态模式<span class="text-[6px] text-gray-400 ml-3">https://domain.com/post/{id}</span> </el-radio>
+                <el-radio :label="2">静态模式<span class="text-[6rem] text-gray-400 ml-3">https://domain.com/post/{id}</span> </el-radio>
               </div>
               <div class="w-full">
                 <el-radio :label="3"
-                  >月日结构 <span class="text-[6px] text-gray-400 ml-3">https://domain.com/{{ date.getMonth() }}/{{ date.getDay() }}/{id}</span>
+                  >月日结构 <span class="text-[6rem] text-gray-400 ml-3">https://domain.com/{{ date.getMonth() }}/{{ date.getDay() }}/{id}</span>
                 </el-radio>
               </div>
               <div class="w-full">
@@ -54,7 +54,7 @@
 
           <el-form-item label="URL后缀">
             <el-input placeholder="URL后缀" v-model="formData.site_url_suffix" style="width: 200px" />
-            <div class="text-[5px] text-gray-400 ml-3">例如: html, asp, php 等等后缀，但是在动态模式下无效</div>
+            <div class="text-[5rem] text-gray-400 ml-3">例如: html, asp, php 等等后缀，但是在动态模式下无效</div>
           </el-form-item>
         </div>
         <el-divider content-position="center" />

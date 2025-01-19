@@ -9,7 +9,7 @@
 
 ## 发布前端 view 文件
 ```shell
-php artisan view:publish --tag=cms-views
+php artisan vendor:publish --tag=cms-views
 ```
 
 发布之后页面如果还没有显示，请重新启动前端 `yarn dev`
